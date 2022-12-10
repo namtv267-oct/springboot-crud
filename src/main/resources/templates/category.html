@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Category page</title>
+    <link th:href="@{/style.css}" rel="stylesheet">
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="category : ${categories}">
+        <td th:text="${category.categoryId}"></td>
+        <td th:text="${category.categoryName}"></td>
+        <td th:text="${category.description}"></td>
+        <td><a th:href="@{/products/getProductsByCategoryId/{categoryId}(categoryId=${category.getCategoryId()})}">Show
+            Product</a></td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+        <td>
+            <a th:href="@{/products/insertProduct}">Insert new Product</a>
+        </td>
+    </tr>
+    </tfoot>
+
+</table>
+</body>
+</html>

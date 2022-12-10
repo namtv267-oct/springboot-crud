@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Update Product</title>
+    <link th:href="@{/style.css}" rel="stylesheet">
+</head>
+<body>
+<h3>Do you really want to assign product :<strong style="color:red" th:text="${product.getProductName()}"></strong> to
+    other categoryId
+</h3>
+<form method="post"
+      th:action="@{/products/updateProduct/{productId}(productId=${product.getProductId()})}"
+      th:object="${product}">
+    <input type="text"
+           th:field="*{productName}"
+           th:placeholder="*{productName}"
+    /><br/>
+    <p th:if="${#fields.hasErrors('productName')}" th:class="${#fields.hasErrors('productName')}?error"
+       th:errors="*{productName}"></p>
+    <input type="number"
+           th:field="*{price}"
+           th:placeholder="*{price}"
+    />
+    <br/>
+    <input type="text"
+           th:field="*{description}"
+           th:placeholder="*{description}"
+    />
+    <p th:if="${#fields.hasErrors('description')}" th:class="${#fields.hasErrors('description')}?error"
+       th:errors="*{description}"></p>
+    <br/>
+    <select th:field="*{categoryId}" id="categories">
+        <option th:each="item : ${categories}"
+                th:value="${item.getCategoryId()}"
+                th:text="${item.getCategoryId()}">
+        </option>
+    </select>
+    <button type="submit">Update</button>
+</form>
+<form method="post"
+      th:action="@{/products/deleteProduct/{productId}(productId=${product.productId})}"
+      th:onsubmit="confirmDelete()"
+>
+    <button type="submit">Delete</button>
+</form>
+<script type="text/javascript" th:src="@{/js.js}"></script>
+</body>
+</html>

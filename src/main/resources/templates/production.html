@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Product List</title>
+    <link th:href="@{/style.css}" rel="stylesheet">
+</head>
+<body>
+<h1>Product list by CategoryId</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each ="item : ${products}">
+        <td th:text="*{item.getProductId()}"></td>
+        <td th:text="*{item.getProductName()}"></td>
+        <td th:text="*{item.getPrice()}"></td>
+        <td th:text="*{item.getDescription()}"></td>
+        <td><a th:href="@{/products/changeCategory/{productId}(productId=${item.getProductId()})}">Update this product</a></td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+        <td>
+            <a th:href="@{/products/insertProduct}">Insert new Product</a>
+        </td>
+        <td><a th:href="@{/categories}">Go back Categories Page</a></td>
+    </tr>
+    </tfoot>
+</table>
+</body>
+</html>

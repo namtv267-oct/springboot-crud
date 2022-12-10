@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Update Product</title>
+  <link th:href="@{/style.css}" rel="stylesheet">
+</head>
+<body>
+<h3>Insert New Product</h3>
+<form method="post"
+      th:action="@{/products/insertProduct}"
+      th:object="${product}">
+  <input type="text"
+         th:field="*{productName}"
+         placeholder="Enter Product's name"
+  /><br/>
+  <p th:if="${#fields.hasErrors('productName')}" th:class="${#fields.hasErrors('productName')}?error" th:errors="*{productName}"></p>
+  <input type="number"
+         th:field="*{price}"
+         placeholder="Enter Product's price"
+  />
+  <br/>
+  <input type="text"
+         th:field="*{description}"
+         placeholder="Enter Product's desription"
+  />
+  <p th:if="${#fields.hasErrors('description')}" th:class="${#fields.hasErrors('description')}?error" th:errors="*{description}"></p>
+  <br/>
+  <select th:field="*{categoryId}" id="categories">
+    <option th:each="item : ${categories}"
+            th:value="${item.getCategoryId()}"
+            th:text="${item.getCategoryId()}">
+    </option>
+  </select>
+  <button type="submit" >OK</button>
+</form>
+<p th:text="${error}"></p>
+</body>
+</html>
